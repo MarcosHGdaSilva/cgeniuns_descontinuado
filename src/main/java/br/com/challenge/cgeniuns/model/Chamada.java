@@ -16,16 +16,12 @@ public class Chamada {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message="Campo Obrigatório")
     private LocalDate dt_chamada;
 
-    @NotBlank(message="Campo Obrigatório")
     private LocalTime hora;
 
-    @NotBlank(message="Campo Obrigatório")
     private LocalTime duracao;
 
-    @NotBlank(message="Campo Obrigatório")
     private boolean resultado;
 
     @NotBlank(message="Campo Obrigatório")

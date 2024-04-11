@@ -22,7 +22,6 @@ public class Produto {
     @NotBlank(message = "Campo Obrigatório")
     private String nome;
     
-    @NotBlank(message = "Campo Obrigatório")
     @Positive
     private BigDecimal valor;
     

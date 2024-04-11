@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,28 +52,62 @@ public class ClienteController {
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("cpf/{cpf}")
+    public ResponseEntity<Cliente> get(@PathVariable String cpf){
+        log.info("Buscar por CPF: {}", cpf);
+        Cliente cliente = clienteRepository.findByCpf(cpf);
+    if (cliente != null) {
+        return ResponseEntity.ok(cliente);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+    }
     
-    @DeleteMapping("id")
+    @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
-        verificarExistencia(id);
+        verificarId(id);
         clienteRepository.deleteById(id);
+    }
+
+    @Transactional
+    @DeleteMapping("cpf/{cpf}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteByCpf (@PathVariable String cpf){
+        log.info("Apagando Cliente com CPF {}", cpf);
+        verificarCpf(cpf);
+        clienteRepository.deleteByCpf(cpf);
     }
 
     @PutMapping("{id}")
     public  Cliente update(@PathVariable Long id, @RequestBody Cliente cliente){
         log.info("Atualizando o cadastro do id={} para {}", id, cliente);
-        verificarExistencia(id);
+        verificarId(id);
         cliente.setId(id);
         return clienteRepository.save(cliente);
     }
 
-    private void verificarExistencia(Long id){
+    @PutMapping("cpf/{cpf}")
+    public  Cliente update(@PathVariable String cpf, @RequestBody Cliente cliente){
+        log.info("Atualizando o cadastro do id={} para {}", cpf, cliente);
+        verificarCpf(cpf);
+        cliente.setCpf(cpf);
+        return clienteRepository.save(cliente);
+    }
+
+    private void verificarId(Long id){
         clienteRepository.
         findById(id)
         .orElseThrow(
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
     }
+    private void verificarCpf(String cpf){
+        Cliente cliente = clienteRepository.findByCpf(cpf);
+    if (cliente == null) {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente com CPF não encontrado");
+    }
+}
 }

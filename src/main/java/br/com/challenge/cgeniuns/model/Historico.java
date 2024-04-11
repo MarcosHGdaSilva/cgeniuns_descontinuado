@@ -16,7 +16,6 @@ public class Historico {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message="Campo Obrigatório")
     private Long idProduto;
 
     @NotBlank(message="Campo Obrigatório")

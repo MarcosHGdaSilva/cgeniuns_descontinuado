@@ -51,7 +51,7 @@ public class HistoricoController {
         .orElse(ResponseEntity.notFound().build());
     }
     
-    @DeleteMapping("id")
+    @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
