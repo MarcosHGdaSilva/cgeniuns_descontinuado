@@ -42,13 +42,17 @@ public class AtendenteController {
     @ResponseStatus(CREATED)
     public Atendente create(@RequestBody Atendente atendente){
         log.info("cadastrando atendente: {}", atendente);
-        return  atendenteRepository.save(atendente);
+    if (atendenteRepository.findByCpf(atendente.getCpf()) == null) {
+        return atendenteRepository.save(atendente);
+    }else {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente já cadastrado");
     }
+}
 
     @GetMapping("{id}")
     public ResponseEntity<Atendente> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
-        return  atendenteRepository
+        return atendenteRepository
         .findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
@@ -62,7 +66,7 @@ public class AtendenteController {
     } else {
         return ResponseEntity.notFound().build();
     }
-    }
+}
     
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
@@ -85,7 +89,6 @@ public class AtendenteController {
     @PutMapping("{id}")
     public  Atendente update(@PathVariable Long id, @RequestBody Atendente atendente){
         log.info("Atualizando o cadastro do id={} para {}", id, atendente);
-
         verificarId(id);
         atendente.setId(id);
         return atendenteRepository.save(atendente);

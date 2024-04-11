@@ -41,13 +41,18 @@ public class ClienteController {
     @ResponseStatus(CREATED)
     public Cliente create(@RequestBody Cliente cliente){
         log.info("cadastrando cliente: {}", cliente);
-        return  clienteRepository.save(cliente);
+        if (clienteRepository.findByCpf(cliente.getCpf()) == null){
+            return clienteRepository.save(cliente);
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente já cadastrado");
+        }
+        
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Cliente> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
-        return  clienteRepository
+        return clienteRepository
         .findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
