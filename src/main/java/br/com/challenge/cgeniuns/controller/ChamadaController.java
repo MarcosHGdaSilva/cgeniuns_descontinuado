@@ -1,9 +1,9 @@
 package br.com.challenge.cgeniuns.controller;
 
-import java.util.List;
-
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.challenge.cgeniuns.model.Chamada;
+import br.com.challenge.cgeniuns.repository.AtendenteRepository;
 import br.com.challenge.cgeniuns.repository.ChamadaRepository;
+import br.com.challenge.cgeniuns.repository.ClienteRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -29,16 +31,32 @@ import lombok.extern.slf4j.Slf4j;
 public class ChamadaController {
     @Autowired
     ChamadaRepository chamadaRepository;
+    @Autowired
+    ClienteRepository clienteRepository;
+    @Autowired
+    AtendenteRepository atendenteRepository;
 
     @GetMapping
     public List<Chamada> index(){
         return  chamadaRepository.findAll();
     }
 
+    // @PostMapping
+    // @ResponseStatus(CREATED)
+    // public Chamada create(@RequestBody Chamada chamada){
+    //     log.info("cadastrando chamada: {}", chamada);
+    //     if(atendenteRepository.findByCpf(chamada.getCpf_atendente()) != null && clienteRepository.findByCpf(chamada.getCpf_user()) != null){
+    //         return  chamadaRepository.save(chamada);
+    //     }else{
+    //         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "CPF não cadastrado.");
+    //     }
+    // }
     @PostMapping
     @ResponseStatus(CREATED)
     public Chamada create(@RequestBody Chamada chamada){
         log.info("cadastrando chamada: {}", chamada);
+        verificarExistenciaCpfAtendente(chamada.getCpf_atendente());
+        verificarExistenciaCpfCliente(chamada.getCpf_user());
         return  chamadaRepository.save(chamada);
     }
 
@@ -55,7 +73,6 @@ public class ChamadaController {
     @ResponseStatus(NO_CONTENT)
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
-
         verificarExistencia(id);
         chamadaRepository.deleteById(id);
     }
@@ -76,5 +93,15 @@ public class ChamadaController {
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
     }
+    private void verificarExistenciaCpfAtendente(String cpf){
+        if (atendenteRepository.findByCpf(cpf) == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente não existe.");
+        }
+    }
 
+    private void verificarExistenciaCpfCliente(String cpf){
+        if (clienteRepository.findByCpf(cpf) == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente não existe.");
+        }
+    }
 }
