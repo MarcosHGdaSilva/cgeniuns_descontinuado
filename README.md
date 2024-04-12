@@ -1,5 +1,8 @@
-# CGenius 
+# CGeniuns 
 
+# Diagrama das Classes e Métodos
+
+![](documentacao/cgeniuns.jpg)
 
 ## Endpoints
 

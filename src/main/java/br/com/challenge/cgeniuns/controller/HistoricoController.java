@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.challenge.cgeniuns.model.Historico;
+import br.com.challenge.cgeniuns.repository.ClienteRepository;
 import br.com.challenge.cgeniuns.repository.HistoricoRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class HistoricoController {
     @Autowired
     HistoricoRepository historicoRepository;
+    @Autowired
+    ClienteRepository clienteRepository;
 
     @GetMapping
     public List<Historico> index(){
@@ -39,6 +42,7 @@ public class HistoricoController {
     @ResponseStatus(CREATED)
     public Historico create(@RequestBody Historico historico){
         log.info("cadastrando historico: {}", historico);
+        verificarExistenciaCpfCliente(historico.getCpfCliente());
         return  historicoRepository.save(historico);
     }
 
@@ -75,5 +79,11 @@ public class HistoricoController {
         .orElseThrow(
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
+    }
+
+    private void verificarExistenciaCpfCliente(String cpf){
+        if (clienteRepository.findByCpf(cpf) == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não existe no cadastro.");
+        }
     }
 }

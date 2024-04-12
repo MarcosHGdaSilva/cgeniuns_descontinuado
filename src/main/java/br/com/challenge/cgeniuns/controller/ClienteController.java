@@ -96,7 +96,7 @@ public class ClienteController {
 
     @PutMapping("cpf/{cpf}")
     public  Cliente update(@PathVariable String cpf, @RequestBody Cliente cliente){
-        log.info("Atualizando o cadastro do id={} para {}", cpf, cliente);
+        log.info("Atualizando o cadastro do pcf={} para {}", cpf, cliente);
         verificarCpf(cpf);
         cliente.setCpf(cpf);
         return clienteRepository.save(cliente);

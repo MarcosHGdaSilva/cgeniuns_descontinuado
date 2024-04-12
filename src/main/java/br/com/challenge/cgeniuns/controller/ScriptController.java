@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.challenge.cgeniuns.model.Script;
+import br.com.challenge.cgeniuns.repository.ChamadaRepository;
+import br.com.challenge.cgeniuns.repository.ClienteRepository;
+import br.com.challenge.cgeniuns.repository.HistoricoRepository;
 import br.com.challenge.cgeniuns.repository.ScriptRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +32,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ScriptController {
     @Autowired
     ScriptRepository scriptRepository;
+    @Autowired
+    HistoricoRepository historicoRepository;
+    @Autowired
+    ChamadaRepository chamadaRepository;
+    @Autowired
+    ClienteRepository clienteRepository;
 
 
     @GetMapping
@@ -40,6 +49,9 @@ public class ScriptController {
     @ResponseStatus(CREATED)
     public Script create(@RequestBody Script script){
         log.info("cadastrando script: {}", script);
+        verificarExistenciaHistorico(script.getId_compra());
+        verificarExistenciaIdChamada(script.getId_chamada());
+        verificarExistenciaCliente(script.getCpf_user());
         return  scriptRepository.save(script);
     }
 
@@ -76,5 +88,16 @@ public class ScriptController {
         .orElseThrow(
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
+    }
+    private void verificarExistenciaHistorico(Long id){
+    }
+    
+    private void verificarExistenciaIdChamada(Long id){
+    }
+    
+    private void verificarExistenciaCliente(String cpf){
+        if (clienteRepository.findByCpf(cpf) == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não existe no cadastro.");
+        }
     }
 }
