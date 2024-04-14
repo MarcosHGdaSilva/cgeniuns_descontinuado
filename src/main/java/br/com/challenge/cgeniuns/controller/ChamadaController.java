@@ -47,7 +47,7 @@ public class ChamadaController {
     public Chamada create(@RequestBody Chamada chamada){
         log.info("cadastrando chamada: {}", chamada);
         verificarExistenciaCpfAtendente(chamada.getCpf_atendente());
-        verificarExistenciaCpfCliente(chamada.getCpf_user());
+        verificarExistenciaCpfCliente(chamada.getCpf_cliente());
         return  chamadaRepository.save(chamada);
     }
 
@@ -71,10 +71,9 @@ public class ChamadaController {
     @PutMapping("{id}")
     public  Chamada update(@PathVariable Long id, @RequestBody Chamada chamada){
         log.info("Atualizando o cadastro do id={} para {}", id, chamada);
-
         verificarExistencia(id);
         verificarExistenciaCpfAtendente(chamada.getCpf_atendente());
-        verificarExistenciaCpfCliente(chamada.getCpf_user());
+        verificarExistenciaCpfCliente(chamada.getCpf_cliente());
         chamada.setId(id);
         return chamadaRepository.save(chamada);
     }
@@ -86,14 +85,14 @@ public class ChamadaController {
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
     }
-    private void verificarExistenciaCpfAtendente(String cpf){
-        if (atendenteRepository.findByCpf(cpf) == null){
+    private void verificarExistenciaCpfAtendente(String cpf_atendente){
+        if (atendenteRepository.findByCpf_atendente(cpf_atendente) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente não está cadastrado.");
         }
     }
 
-    private void verificarExistenciaCpfCliente(String cpf){
-        if (clienteRepository.findByCpf(cpf) == null){
+    private void verificarExistenciaCpfCliente(String cpf_cliente){
+        if (clienteRepository.findByCpf_cliente(cpf_cliente) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não está cadastrado.");
         }
     }

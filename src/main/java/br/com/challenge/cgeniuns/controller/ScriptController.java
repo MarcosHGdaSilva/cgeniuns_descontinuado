@@ -51,7 +51,7 @@ public class ScriptController {
         log.info("cadastrando script: {}", script);
         verificarExistenciaHistorico(script.getId_compra());
         verificarExistenciaIdChamada(script.getId_chamada());
-        verificarExistenciaCliente(script.getCpf_user());
+        verificarExistenciaCliente(script.getCpf_cliente());
         return  scriptRepository.save(script);
     }
 
@@ -90,13 +90,20 @@ public class ScriptController {
         );
     }
     private void verificarExistenciaHistorico(Long id){
+        if (!historicoRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Histórico não encontrado.");
+        }
     }
     
     private void verificarExistenciaIdChamada(Long id){
+        if (!chamadaRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamada não encontrada.");
+        }
     }
     
-    private void verificarExistenciaCliente(String cpf){
-        if (clienteRepository.findByCpf(cpf) == null){
+    
+    private void verificarExistenciaCliente(String cpf_cliente){
+        if (clienteRepository.findByCpf_cliente(cpf_cliente) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não existe no cadastro.");
         }
     }

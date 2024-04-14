@@ -35,5 +35,6 @@
 {
     "id_compra": "1",
     "id_chamada": "1",
-    "cpf_user": "32165498710"
+    "cpf_user": "12345678910",
+    "descricao": "Descrição do Script"
 }

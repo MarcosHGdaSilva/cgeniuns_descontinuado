@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -18,16 +19,16 @@ public class Cliente {
     private Long id;
     
     @NotBlank(message = "Campo obrigatório")
-    private String nome;
+    private String nome_cliente;
 
     @NotBlank(message = "Campo obrigatório")
     @Size(min=11,  message = "CPF Inválido")
-    private String cpf;
+    private String cpf_cliente;
 
-    @NotBlank(message = "Campo obrigatório")
     private String genero;
 
     @NotBlank(message = "Campo obrigatório")
+    @Size(min=8, max=8, message = "Cep Inválido")
     private String cep;
 
     @NotBlank(message = "Campo obrigatório")
@@ -35,13 +36,16 @@ public class Cliente {
     private String telefone;
 
     @NotBlank(message = "Campo obrigatório")
+    @Email(message = "Email inválido")
     private String email;
 
+    private String preferencia_contato;
+
     @Past(message =  "Data de nascimento inválida")
-    private LocalDate dataNascimento;
+    private LocalDate dtNascimento;
 
     @NotBlank(message = "Campo obrigatório")
     @Size(min = 6, message = "Mínimo de 6 caracteres")
-    private String senha;
+    private String senha_user;
 
 }

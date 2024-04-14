@@ -1,8 +1,16 @@
-# CGeniuns 
+# CGeniuns
+
+# Cronograma
+
+![](documentacao/imagens/Cronograma.png)
+
+# Diagrama de Entidade e Relacionamento (DER)
+
+![](documentacao/imagens/DER.png)
 
 # Diagrama das Classes e Métodos
 
-![](documentacao/cgeniuns.jpg)
+![](documentacao/imagens/Diagrama%20Classes%20e%20Entidades.jpg)
 
 ## Endpoints
 
@@ -37,14 +45,15 @@ Cadastrar um novo cliente.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|nome|string|✅|
-|cpf|string|✅|
-|genero|string|✅|
-|cep|string|✅|
-|telefone|string|✅|
-|email|String|✅|
-|dataNascimento|LocalDate|✅|
-|senha|string|✅|
+|nome_cliente|string|✅|O nome do cliente para ser cadastrado
+|cpf_cliente|string|✅|O CPF do cliente para ser cadastrado
+|genero|string|❌|O genero do cliente para ser cadastrado
+|cep|string|✅|O cep do cliente para ser cadastrado
+|telefone|string|✅|O telefone do cliente para ser cadastrado
+|email|String|✅|O email do cliente para ser cadastrado
+|preferencia_contato|String|❌|A Preferência de contato do cliente para ser cadastrado(ex. Manhã)
+|dtNascimento|LocalDate|✅|A data de nascimento do cliente para ser cadastrado
+|senha_user|string|✅|A senha do cliente para ser cadastrado
 
 
 **códigos de status**
@@ -77,14 +86,15 @@ Altera o cliente com o `id` ou `cpf` informado.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|nome|string|✅|
-|cpf|string|✅|
-|genero|string|✅|
-|cep|string|✅|
-|telefone|string|✅|
-|email|String|✅|
-|dataNascimento|LocalDate|✅|
-|senha|string|✅|
+|nome_cliente|string|✅|O nome do cliente para ser cadastrado
+|cpf_cliente|string|✅|O CPF do cliente para ser cadastrado
+|genero|string|❌|O genero do cliente para ser cadastrado
+|cep|string|✅|O cep do cliente para ser cadastrado
+|telefone|string|✅|O telefone do cliente para ser cadastrado
+|email|String|✅|O email do cliente para ser cadastrado
+|preferencia_contato|String|❌|A Preferência de contato do cliente para ser cadastrado(ex. Manhã)
+|dtNascimento|LocalDate|✅|A data de nascimento do cliente para ser cadastrado
+|senha_user|string|✅|A senha do cliente para ser cadastrado
 
 **códigos de status**
 
@@ -98,14 +108,15 @@ Altera o cliente com o `id` ou `cpf` informado.
 
 ```js
 {
-    "nome":"Antonio",
-    "cpf":"12345678910",
+    "nome_cliente":"Antonio",
+    "cpf_cliente":"12345678910",
     "genero": "masculino",
     "cep": "12345678",
     "telefone": "912345678",
     "email": "teste@gmail.com",
-    "dataNascimento": "2020-02-03",
-    "senha": "123456"
+    "preferencia_contato": "Manhã",
+    "dtNascimento": "2020-02-03",
+    "senha_user": "123456"
 }
 ```
 
@@ -139,10 +150,11 @@ Cadastrar um novo atendente.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|nome|string|✅|
-|cpf|string|✅|
-|setor|string|✅|
-|senha|string|✅|
+|nome_atendente|string|✅|O nome do atendente para ser cadastrado
+|cpf_atendente|string|✅||O CPF do atendente para ser cadastrado
+|setor|string|✅||O setor do atendente para ser cadastrado
+|senha_atendente|string|✅||A senha do atendente para ser cadastrado
+|avaliacao_atendente|integer|✅||A avaliação do atendente para ser cadastrado(ex. 0 = ruim, 5 = bom)
 
 
 **códigos de status**
@@ -174,10 +186,11 @@ Altera o atendente com o `id` ou `cpf` informado.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|nome|string|✅|
-|cpf|string|✅|
-|setor|string|✅|
-|senha|string|✅|
+|nome_atendente|string|✅|O nome do atendente para ser cadastrado
+|cpf_atendente|string|✅||O CPF do atendente para ser cadastrado
+|setor|string|✅||O setor do atendente para ser cadastrado
+|senha_atendente|string|✅||A senha do atendente para ser cadastrado
+|avaliacao_atendente|integer|✅||A avaliação do atendente para ser cadastrado(ex. 0 = ruim, 5 = bom)
 
 **códigos de status**
 
@@ -191,10 +204,11 @@ Altera o atendente com o `id` ou `cpf` informado.
 
 ```js
 {
-    "nome":"João",
-    "cpf":"32165498710",
+    "nome_atendente":"João",
+    "cpf_atendente":"32165498710",
     "setor": "vendas",
-    "senha": "654321"
+    "senha_atendente": "654321",
+    "avaliacao_atendente" : 4
 }
 ```
 
@@ -224,12 +238,12 @@ Cadastrar uma nova chamada.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|dt_chamada|LocalDate|✅|
-|hora|LocalTime|✅|
-|duracao|LocalTime|✅|
-|resultado|Boolean|✅|
-|cpf_user|string|✅|
-|cpf_atendente|String|✅|
+|dt_chamada|LocalDate|✅|A data da chamada para ser cadastrado
+|hora|LocalTime|✅|A hora da chamada para ser cadastrado
+|duracao|LocalTime|✅|A duracao da chamada para ser cadastrado
+|resultado|Boolean|✅|A resultado da chamada para ser cadastrado
+|cpf_cliente|String|✅|O CPF do cliente da chamada para ser cadastrado
+|cpf_atendente|String|✅|O CPF do atendente da chamada para ser cadastrado
 
 **códigos de status**
 
@@ -255,12 +269,12 @@ Altera o chamada com o `id` informado.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|dt_chamada|LocalDate|✅|
-|hora|LocalTime|✅|
-|duracao|LocalTime|✅|
-|resultado|Boolean|✅|
-|cpf_user|string|✅|
-|cpf_atendente|String|✅|
+|dt_chamada|LocalDate|✅|A data da chamada para ser cadastrado
+|hora|LocalTime|✅|A hora da chamada para ser cadastrado
+|duracao|LocalTime|✅|A duracao da chamada para ser cadastrado
+|resultado|Boolean|✅|A resultado da chamada para ser cadastrado
+|cpf_cliente|String|✅|O CPF do cliente da chamada para ser cadastrado
+|cpf_atendente|String|✅|O CPF do atendente da chamada para ser cadastrado
 
 **códigos de status**
 
@@ -277,7 +291,7 @@ Altera o chamada com o `id` informado.
     "hora": "10:15:30",
     "duracao": "00:05:30",
     "resultado": "True",
-    "cpf_user": "12345678910",
+    "cpf_cliente": "12345678910",
     "cpf_atendente": "32165498710"
 }
 ```
@@ -307,9 +321,9 @@ Cadastrar uma nova produto.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|Descricao|string|✅|
-|nome|string|✅|
-|valor|BigDecimal|✅|
+|descricao_produto|string|✅|A descrição do produto para ser cadastrado
+|nome_produto|string|✅|O nome do produto para ser cadastrado
+|valor_produto|BigDecimal|❌|O valor do produto para ser cadastrado
 
 **códigos de status**
 
@@ -335,9 +349,9 @@ Altera o produto com o `id` informado.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|Descricao|string|✅|
-|nome|string|✅|
-|valor|BigDecimal|✅|
+|descricao_produto|string|✅|A descrição do produto para ser cadastrado
+|nome_produto|string|✅|O nome do produto para ser cadastrado
+|valor_produto|BigDecimal|❌|O valor do produto para ser cadastrado
 
 **códigos de status**
 
@@ -350,9 +364,9 @@ Altera o produto com o `id` informado.
 **Schema**
 ```js
 {
-    "descricao": "Descrição do Produto X",
-    "nome": "produto X",
-    "valor": "123.45"
+    "descricao_produto": "Descrição do Produto X",
+    "nome_produto": "produto X",
+    "valor_produto": "123.45"
 }
 ```
 
@@ -381,9 +395,9 @@ Cadastrar uma nova historico.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|idProduto|Long|✅|
-|cpfCliente|string|✅|
-|dataCompra|LocalDate|✅|
+|idProduto|Long|✅|O ID do produto que será cadastrado
+|cpfCliente|string|✅|O CPF do cliente que será cadastrado
+|dtCompra|LocalDate|✅|A data da compra que será cadastrado
 
 **códigos de status**
 
@@ -409,9 +423,9 @@ Altera o historico com o `id` informado.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|idProduto|Long|✅|
-|cpfCliente|string|✅|
-|dataCompra|LocalDate|✅|
+|idProduto|Long|✅|O ID do produto que será cadastrado
+|cpfCliente|string|✅|O CPF do cliente que será cadastrado
+|dtCompra|LocalDate|✅|A data da compra que será cadastrado
 
 **códigos de status**
 
@@ -424,9 +438,9 @@ Altera o historico com o `id` informado.
 **Schema**
 ```js
 {
-    "idProduto": "01" ,
+    "idProduto": "1" ,
     "cpfCliente": "12345678910" ,
-    "dataCompra": "2020-01-05" 
+    "dtCompra": "2020-01-05" 
 }
 ```
 
@@ -455,9 +469,11 @@ Cadastrar uma nova script.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|idCompra|Long|✅|
-|idChamada|Long|✅|
-|cpf_user|String|✅|
+|id_compra|Long|✅|O ID da compra que será cadastrado
+|id_produto|Long|✅|O ID do produto que será cadastrado
+|id_chamada|Long|✅|O ID da chamada que será cadastrado
+|cpf_cliente|String|✅|O CPF do cliente que será cadastrado
+|descricao_script|Long|✅|A descrição do script que será cadastrado
 
 **códigos de status**
 
@@ -483,9 +499,11 @@ Altera o script com o `id` informado.
 
 | campo | tipo | obrigatório | descrição
 |-------|------|:-------------:|-----------
-|idCompra|Long|✅|
-|idChamada|Long|✅|
-|cpf_user|String|✅|
+|id_compra|Long|✅|O ID da compra que será cadastrado
+|id_produto|Long|✅|O ID do produto que será cadastrado
+|id_chamada|Long|✅|O ID da chamada que será cadastrado
+|cpf_cliente|String|✅|O CPF do cliente que será cadastrado
+|descricao_script|Long|✅|A descrição do script que será cadastrado
 
 **códigos de status**
 
@@ -498,8 +516,10 @@ Altera o script com o `id` informado.
 **Schema**
 ```js
 {
-    "id_compra": "01",
-    "id_chamada": "01",
-    "cpf_user": "32165498710"
+    "id_compra": "1",
+    "id_produto": "1",
+    "id_chamada": "1",
+    "cpf_cliente": "12345678910",
+    "descricao_script" : "Descrição do Script"
 }
 ```

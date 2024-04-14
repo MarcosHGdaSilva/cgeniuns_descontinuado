@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Data
@@ -17,12 +17,11 @@ public class Produto {
     private Long id;
     
     @NotBlank(message = "Campo Obrigatório")
-    private String descricao;
-    
+    private String nome_produto;
+
     @NotBlank(message = "Campo Obrigatório")
-    private String nome;
+    private String descricao_produto;
     
-    @Positive
-    private BigDecimal valor;
-    
+    @PositiveOrZero(message = "O valor do produto deve ser positivo")
+    private BigDecimal valor_produto;
 }

@@ -7,7 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
 
 @Data
@@ -16,12 +17,13 @@ public class Historico {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull(message="Campo Obrigatório.")
     private Long idProduto;
 
-    @NotBlank(message="Campo Obrigatório")
+    @NotBlank(message="Campo Obrigatório.")
     private String cpfCliente;
 
-    @Past(message = "Campo Obrigatório")
-    private LocalDate dataCompra;
+    @PastOrPresent(message = "A data inserida é inválida.")
+    private LocalDate dtCompra;
     
 }

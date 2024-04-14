@@ -41,7 +41,7 @@ public class ClienteController {
     @ResponseStatus(CREATED)
     public Cliente create(@RequestBody Cliente cliente){
         log.info("cadastrando cliente: {}", cliente);
-        if (clienteRepository.findByCpf(cliente.getCpf()) == null){
+        if (clienteRepository.findByCpf_cliente(cliente.getCpf_cliente()) == null){
             return clienteRepository.save(cliente);
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente já cadastrado");
@@ -59,9 +59,9 @@ public class ClienteController {
     }
 
     @GetMapping("cpf/{cpf}")
-    public ResponseEntity<Cliente> get(@PathVariable String cpf){
-        log.info("Buscar por CPF: {}", cpf);
-        Cliente cliente = clienteRepository.findByCpf(cpf);
+    public ResponseEntity<Cliente> get(@PathVariable String cpf_cliente){
+        log.info("Buscar por CPF: {}", cpf_cliente);
+        Cliente cliente = clienteRepository.findByCpf_cliente(cpf_cliente);
     if (cliente != null) {
         return ResponseEntity.ok(cliente);
     } else {
@@ -80,10 +80,10 @@ public class ClienteController {
     @Transactional
     @DeleteMapping("cpf/{cpf}")
     @ResponseStatus(NO_CONTENT)
-    public void deleteByCpf (@PathVariable String cpf){
-        log.info("Apagando Cliente com CPF {}", cpf);
-        verificarCpf(cpf);
-        clienteRepository.deleteByCpf(cpf);
+    public void deleteByCpf_cliente (@PathVariable String cpf_cliente){
+        log.info("Apagando Cliente com CPF {}", cpf_cliente);
+        verificarCpf(cpf_cliente);
+        clienteRepository.deleteByCpf_cliente(cpf_cliente);
     }
 
     @PutMapping("{id}")
@@ -95,10 +95,10 @@ public class ClienteController {
     }
 
     @PutMapping("cpf/{cpf}")
-    public  Cliente update(@PathVariable String cpf, @RequestBody Cliente cliente){
-        log.info("Atualizando o cadastro do pcf={} para {}", cpf, cliente);
-        verificarCpf(cpf);
-        cliente.setCpf(cpf);
+    public  Cliente update(@PathVariable String cpf_cliente, @RequestBody Cliente cliente){
+        log.info("Atualizando o cadastro do pcf={} para {}", cpf_cliente, cliente);
+        verificarCpf(cpf_cliente);
+        cliente.setCpf_cliente(cpf_cliente);
         return clienteRepository.save(cliente);
     }
 
@@ -109,8 +109,8 @@ public class ClienteController {
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
     }
-    private void verificarCpf(String cpf){
-        Cliente cliente = clienteRepository.findByCpf(cpf);
+    private void verificarCpf(String cpf_cliente){
+        Cliente cliente = clienteRepository.findByCpf_cliente(cpf_cliente);
     if (cliente == null) {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente com CPF não encontrado");
     }
