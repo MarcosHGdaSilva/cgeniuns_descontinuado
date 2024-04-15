@@ -2,15 +2,15 @@
 
 # Cronograma
 
-![](documentacao/imagens/Cronograma.png)
+![](documentacao/Imagens/Cronograma.png)
 
 # Diagrama de Entidade e Relacionamento (DER)
 
-![](documentacao/imagens/DER.png)
+![](documentacao/Imagens/DER.png)
 
 # Diagrama das Classes e Métodos
 
-![](documentacao/imagens/Diagrama%20Classes%20e%20Entidades.jpg)
+![](documentacao/Imagens/Diagrama%20Classes%20e%20Entidades.jpg)
 
 ## Endpoints
 
