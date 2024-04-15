@@ -2,7 +2,7 @@
 
 # Cronograma
 
-![](documentacao/imagens/Cronograma.png)
+![](documentacao/Imagens/Cronograma.png)
 
 # Diagrama de Entidade e Relacionamento (DER)
 
