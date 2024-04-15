@@ -59,7 +59,6 @@ public class HistoricoController {
     @ResponseStatus(NO_CONTENT)
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
-
         verificarExistencia(id);
         historicoRepository.deleteById(id);
     }

@@ -290,7 +290,7 @@ Altera o chamada com o `id` informado.
     "dt_chamada": "2020-01-05",
     "hora": "10:15:30",
     "duracao": "00:05:30",
-    "resultado": "True",
+    "resultado": "true",
     "cpf_cliente": "12345678910",
     "cpf_atendente": "32165498710"
 }

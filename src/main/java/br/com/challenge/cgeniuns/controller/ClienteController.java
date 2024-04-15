@@ -34,7 +34,7 @@ public class ClienteController {
 
     @GetMapping
     public List<Cliente> index(){
-        return  clienteRepository.findAll();
+        return clienteRepository.findAll();
     }
 
     @PostMapping
@@ -58,7 +58,7 @@ public class ClienteController {
         .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("cpf/{cpf}")
+    @GetMapping("cpf/{cpf_cliente}")
     public ResponseEntity<Cliente> get(@PathVariable String cpf_cliente){
         log.info("Buscar por CPF: {}", cpf_cliente);
         Cliente cliente = clienteRepository.findByCpf_cliente(cpf_cliente);
@@ -78,7 +78,7 @@ public class ClienteController {
     }
 
     @Transactional
-    @DeleteMapping("cpf/{cpf}")
+    @DeleteMapping("cpf/{cpf_cliente}")
     @ResponseStatus(NO_CONTENT)
     public void deleteByCpf_cliente (@PathVariable String cpf_cliente){
         log.info("Apagando Cliente com CPF {}", cpf_cliente);
@@ -87,20 +87,28 @@ public class ClienteController {
     }
 
     @PutMapping("{id}")
-    public  Cliente update(@PathVariable Long id, @RequestBody Cliente cliente){
+    public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente){
         log.info("Atualizando o cadastro do id={} para {}", id, cliente);
         verificarId(id);
         cliente.setId(id);
         return clienteRepository.save(cliente);
     }
 
-    @PutMapping("cpf/{cpf}")
-    public  Cliente update(@PathVariable String cpf_cliente, @RequestBody Cliente cliente){
+    @PutMapping("cpf/{cpf_cliente}")
+    public Cliente update(@PathVariable String cpf_cliente, @RequestBody Cliente cliente){
         log.info("Atualizando o cadastro do pcf={} para {}", cpf_cliente, cliente);
-        verificarCpf(cpf_cliente);
-        cliente.setCpf_cliente(cpf_cliente);
-        return clienteRepository.save(cliente);
-    }
+        Cliente clienteSalvo = verificarCpf(cpf_cliente);
+        clienteSalvo.setNome_cliente(cliente.getNome_cliente());
+        clienteSalvo.setCpf_cliente(cliente.getCpf_cliente());
+        clienteSalvo.setGenero(cliente.getGenero());
+        clienteSalvo.setCep(cliente.getCep());
+        clienteSalvo.setTelefone(cliente.getTelefone());
+        clienteSalvo.setEmail(cliente.getEmail());
+        clienteSalvo.setPreferencia_contato(cliente.getPreferencia_contato());
+        clienteSalvo.setDtNascimento(cliente.getDtNascimento());
+        clienteSalvo.setSenha_user(cliente.getSenha_user());
+        return clienteRepository.save(clienteSalvo);
+}
 
     private void verificarId(Long id){
         clienteRepository.
@@ -109,10 +117,13 @@ public class ClienteController {
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
     }
-    private void verificarCpf(String cpf_cliente){
+
+    private Cliente verificarCpf(String cpf_cliente){
         Cliente cliente = clienteRepository.findByCpf_cliente(cpf_cliente);
     if (cliente == null) {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente com CPF não encontrado");
+    }else{
+        return cliente;
     }
 }
 }

@@ -76,7 +76,6 @@ public class ScriptController {
     @PutMapping("{id}")
     public  Script update(@PathVariable Long id, @RequestBody Script script){
         log.info("Atualizando o cadastro do id={} para {}", id, script);
-
         verificarExistencia(id);
         script.setId(id);
         return scriptRepository.save(script);

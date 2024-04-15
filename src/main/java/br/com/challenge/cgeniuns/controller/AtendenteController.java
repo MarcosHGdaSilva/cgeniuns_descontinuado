@@ -35,7 +35,7 @@ public class AtendenteController {
 
     @GetMapping
     public List<Atendente> index(){
-        return  atendenteRepository.findAll();
+        return atendenteRepository.findAll();
     }
 
     @PostMapping
@@ -57,7 +57,7 @@ public class AtendenteController {
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
     }
-    @GetMapping("cpf/{cpf}")
+    @GetMapping("cpf/{cpf_atendente}")
     public ResponseEntity<Atendente> get(@PathVariable String cpf_atendente){
         log.info("Buscar por CPF: {}", cpf_atendente);
         Atendente atendente = atendenteRepository.findByCpf_atendente(cpf_atendente);
@@ -78,7 +78,7 @@ public class AtendenteController {
     }
     
     @Transactional
-    @DeleteMapping("cpf/{cpf}")
+    @DeleteMapping("cpf/{cpf_atendente}")
     @ResponseStatus(NO_CONTENT)
     public void deleteByCpf_atendente (@PathVariable String cpf_atendente){
         log.info("Apagando Atendente com CPF {}", cpf_atendente);
@@ -87,19 +87,23 @@ public class AtendenteController {
     }
 
     @PutMapping("{id}")
-    public  Atendente update(@PathVariable Long id, @RequestBody Atendente atendente){
+    public Atendente update(@PathVariable Long id, @RequestBody Atendente atendente){
         log.info("Atualizando o cadastro do id={} para {}", id, atendente);
         verificarId(id);
         atendente.setId(id);
         return atendenteRepository.save(atendente);
     }
 
-    @PutMapping("cpf/{cpf}")
-    public  Atendente update(@PathVariable String cpf_atendente, @RequestBody Atendente atendente){
+    @PutMapping("cpf/{cpf_atendente}")
+    public Atendente update(@PathVariable String cpf_atendente, @RequestBody Atendente atendente){
         log.info("Atualizando o cadastro do id={} para {}", cpf_atendente, atendente);
-        verificarCpf(cpf_atendente);
-        atendente.setCpf_atendente(cpf_atendente);
-        return atendenteRepository.save(atendente);
+        Atendente atendenteSalvo = verificarCpf(cpf_atendente);
+        atendenteSalvo.setNome_atendente(atendente.getNome_atendente());
+        atendenteSalvo.setCpf_atendente(atendente.getCpf_atendente());
+        atendenteSalvo.setSetor(atendente.getSetor());
+        atendenteSalvo.setSenha_atendente(atendente.getSenha_atendente());
+        atendenteSalvo.setAvaliacao_atendente(atendente.getAvaliacao_atendente());
+        return atendenteRepository.save(atendenteSalvo);
     }
 
     private void verificarId(Long id){
@@ -109,10 +113,12 @@ public class AtendenteController {
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
     }
-    private void verificarCpf(String cpf_atendente){
+    private Atendente verificarCpf(String cpf_atendente){
         Atendente atendente = atendenteRepository.findByCpf_atendente(cpf_atendente);
     if (atendente == null) {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente com CPF não encontrado");
+    }else{
+        return atendente;
     }
 }
 }

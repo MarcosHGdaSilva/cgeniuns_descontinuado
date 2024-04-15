@@ -1,0 +1,824 @@
+{
+	"id": "89c4ad55-ef37-413a-b13b-1e360a82f53b",
+	"name": "RESTful API Basics #blueprint",
+	"timestamp": "2024-04-15T05:40:21.066Z",
+	"collection_id": "30322713-47bde556-7c6a-4388-aa6c-7801bb8e6c8e",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 6,
+	"delay": "1000",
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-04-15T05:39:41.302Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "78ebc54a-2fe2-46c5-85d2-c9b410447159",
+			"name": "Post Cliente",
+			"url": "localhost:8080/cliente",
+			"time": 61,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				61
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "e4d12d8e-330e-49ea-8709-bedf73de7139",
+			"name": "Post Atendente",
+			"url": "localhost:8080/atendente",
+			"time": 25,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "509b7699-c3e3-4acb-9e44-fa5902f4e8bf",
+			"name": "Post Chamada",
+			"url": "localhost:8080/chamada",
+			"time": 22,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "95df5f34-a750-4b17-a197-18c3779b099e",
+			"name": "Post Produto",
+			"url": "localhost:8080/produto",
+			"time": 25,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "01a60a84-4b30-4b29-9fc5-b941c78b22cb",
+			"name": "Post Historico",
+			"url": "localhost:8080/historico",
+			"time": 21,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "3b20e43e-8cf2-4744-805a-7c48bc0b3d16",
+			"name": "Post Script",
+			"url": "localhost:8080/script",
+			"time": 36,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "13f4bf1d-f96f-40a7-a935-5c8a30dc1186",
+			"name": "Get All Cliente",
+			"url": "localhost:8080/cliente",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7a17216e-29cd-4632-84fc-b6615ee85651",
+			"name": "Get All Atendente",
+			"url": "localhost:8080/atendente",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c3a14a8a-a34f-4757-b294-58ad29af6580",
+			"name": "Get All Chamada",
+			"url": "localhost:8080/chamada",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "495c4422-ca63-4a3c-8fad-040567a71547",
+			"name": "Get All Produto",
+			"url": "localhost:8080/produto",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8520a956-f260-4c21-b114-952495e960f6",
+			"name": "Get All Historico",
+			"url": "localhost:8080/historico",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "799c0570-0943-45fa-a52a-5d0558777e85",
+			"name": "Get All Script",
+			"url": "localhost:8080/script",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "63a0f0eb-a684-4f81-aefb-fab913339259",
+			"name": "Put Cliente Id",
+			"url": "localhost:8080/cliente/1",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "61a260ee-6cb0-4f3b-b0c1-7161f51be803",
+			"name": "Put Cliente Cpf",
+			"url": "localhost:8080/cliente/cpf/12345678910",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				24
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5ec4e077-06f9-47a2-ad94-c4536d0f89fe",
+			"name": "Put Atendente Id",
+			"url": "localhost:8080/atendente/1",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e3483d4e-a677-439c-b35c-75cb41d6d4e9",
+			"name": "Put Atendente Cpf",
+			"url": "localhost:8080/atendente/cpf/32165498710",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "096fc26a-e420-4aee-afe3-d64308ca44ea",
+			"name": "Put Chamada",
+			"url": "localhost:8080/chamada/1",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				24
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e8b25479-6a76-45ad-8e10-0c3de1bb3f75",
+			"name": "Put Produto",
+			"url": "localhost:8080/produto/1",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e39dfdd2-edd3-49ea-ac47-7b061a5e3e6b",
+			"name": "Put Historico",
+			"url": "localhost:8080/historico/1",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				24
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a879b3a7-444b-4804-92c5-7b3c1cc31454",
+			"name": "Put Script",
+			"url": "localhost:8080/script/1",
+			"time": 21,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				21
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "cc6ef5b1-0c0e-4c11-9b99-3082bfed370c",
+			"name": "Get Cliente Id",
+			"url": "localhost:8080/cliente/1",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "62a6bf20-f093-4dce-ac36-544e2bd22f23",
+			"name": "Get Cliente Cpf",
+			"url": "localhost:8080/cliente/cpf/12345678910",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "de2aa7c6-79f2-4ac2-b04d-981a24f7bb88",
+			"name": "Get Atendente Id",
+			"url": "localhost:8080/atendente/1",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ddc24da1-25d6-45d8-a88a-41bc7933e9ab",
+			"name": "Get Atendente Cpf",
+			"url": "localhost:8080/atendente/cpf/32165498710",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a0055918-1b1d-4fd7-8c1d-807aa79d34b1",
+			"name": "Get Chamada Id",
+			"url": "localhost:8080/chamada/1",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "69d5703e-c1f5-4e20-bdb2-91adc10e5815",
+			"name": "Get Produto Id",
+			"url": "localhost:8080/produto/1",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "24cf1994-d84a-451f-95a9-fb6c8a562249",
+			"name": "Get Historico Id",
+			"url": "localhost:8080/historico/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a6bff155-460b-4ccf-811a-27ce27eb472b",
+			"name": "Get Script Id",
+			"url": "localhost:8080/script/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fe4392c0-ccbb-458b-a7e8-9c46a30fc6f6",
+			"name": "Delete Cliente Id",
+			"url": "localhost:8080/cliente/1",
+			"time": 12,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ecdf7ed0-1fc6-4c4b-9586-96657c6ec794",
+			"name": "Delete Atendente Cpf",
+			"url": "localhost:8080/atendente/cpf/32165498710",
+			"time": 15,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fd88840b-d386-4c1f-871a-bfadf35a8c09",
+			"name": "Delete Chamada Id",
+			"url": "localhost:8080/chamada/1",
+			"time": 12,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3d619bc2-714e-4e8e-a0d4-bfb450313308",
+			"name": "Delete Produto Id",
+			"url": "localhost:8080/produto/1",
+			"time": 12,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "710257ba-d8dc-4421-9653-19b097640eb2",
+			"name": "Delete Historico Id",
+			"url": "localhost:8080/historico/1",
+			"time": 11,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "41894133-e311-4b22-86c9-645158e467d7",
+			"name": "Delete Script Id",
+			"url": "localhost:8080/script/1",
+			"time": 10,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 585,
+	"collection": {
+		"requests": [
+			{
+				"id": "78ebc54a-2fe2-46c5-85d2-c9b410447159",
+				"method": "POST"
+			},
+			{
+				"id": "e4d12d8e-330e-49ea-8709-bedf73de7139",
+				"method": "POST"
+			},
+			{
+				"id": "509b7699-c3e3-4acb-9e44-fa5902f4e8bf",
+				"method": "POST"
+			},
+			{
+				"id": "95df5f34-a750-4b17-a197-18c3779b099e",
+				"method": "POST"
+			},
+			{
+				"id": "01a60a84-4b30-4b29-9fc5-b941c78b22cb",
+				"method": "POST"
+			},
+			{
+				"id": "3b20e43e-8cf2-4744-805a-7c48bc0b3d16",
+				"method": "POST"
+			},
+			{
+				"id": "13f4bf1d-f96f-40a7-a935-5c8a30dc1186",
+				"method": "GET"
+			},
+			{
+				"id": "7a17216e-29cd-4632-84fc-b6615ee85651",
+				"method": "GET"
+			},
+			{
+				"id": "c3a14a8a-a34f-4757-b294-58ad29af6580",
+				"method": "GET"
+			},
+			{
+				"id": "495c4422-ca63-4a3c-8fad-040567a71547",
+				"method": "GET"
+			},
+			{
+				"id": "8520a956-f260-4c21-b114-952495e960f6",
+				"method": "GET"
+			},
+			{
+				"id": "799c0570-0943-45fa-a52a-5d0558777e85",
+				"method": "GET"
+			},
+			{
+				"id": "63a0f0eb-a684-4f81-aefb-fab913339259",
+				"method": "PUT"
+			},
+			{
+				"id": "61a260ee-6cb0-4f3b-b0c1-7161f51be803",
+				"method": "PUT"
+			},
+			{
+				"id": "5ec4e077-06f9-47a2-ad94-c4536d0f89fe",
+				"method": "PUT"
+			},
+			{
+				"id": "e3483d4e-a677-439c-b35c-75cb41d6d4e9",
+				"method": "PUT"
+			},
+			{
+				"id": "096fc26a-e420-4aee-afe3-d64308ca44ea",
+				"method": "PUT"
+			},
+			{
+				"id": "e8b25479-6a76-45ad-8e10-0c3de1bb3f75",
+				"method": "PUT"
+			},
+			{
+				"id": "e39dfdd2-edd3-49ea-ac47-7b061a5e3e6b",
+				"method": "PUT"
+			},
+			{
+				"id": "a879b3a7-444b-4804-92c5-7b3c1cc31454",
+				"method": "PUT"
+			},
+			{
+				"id": "cc6ef5b1-0c0e-4c11-9b99-3082bfed370c",
+				"method": "GET"
+			},
+			{
+				"id": "62a6bf20-f093-4dce-ac36-544e2bd22f23",
+				"method": "GET"
+			},
+			{
+				"id": "de2aa7c6-79f2-4ac2-b04d-981a24f7bb88",
+				"method": "GET"
+			},
+			{
+				"id": "ddc24da1-25d6-45d8-a88a-41bc7933e9ab",
+				"method": "GET"
+			},
+			{
+				"id": "a0055918-1b1d-4fd7-8c1d-807aa79d34b1",
+				"method": "GET"
+			},
+			{
+				"id": "69d5703e-c1f5-4e20-bdb2-91adc10e5815",
+				"method": "GET"
+			},
+			{
+				"id": "24cf1994-d84a-451f-95a9-fb6c8a562249",
+				"method": "GET"
+			},
+			{
+				"id": "a6bff155-460b-4ccf-811a-27ce27eb472b",
+				"method": "GET"
+			},
+			{
+				"id": "fe4392c0-ccbb-458b-a7e8-9c46a30fc6f6",
+				"method": "DELETE"
+			},
+			{
+				"id": "ecdf7ed0-1fc6-4c4b-9586-96657c6ec794",
+				"method": "DELETE"
+			},
+			{
+				"id": "fd88840b-d386-4c1f-871a-bfadf35a8c09",
+				"method": "DELETE"
+			},
+			{
+				"id": "3d619bc2-714e-4e8e-a0d4-bfb450313308",
+				"method": "DELETE"
+			},
+			{
+				"id": "710257ba-d8dc-4421-9653-19b097640eb2",
+				"method": "DELETE"
+			},
+			{
+				"id": "41894133-e311-4b22-86c9-645158e467d7",
+				"method": "DELETE"
+			}
+		]
+	}
+}
