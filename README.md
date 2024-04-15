@@ -1,5 +1,7 @@
 # CGeniuns
 
+![](documentacao/Imagens/Challenge2024_JAVA.jpg)
+
 # Cronograma
 
 ![](documentacao/Imagens/Cronograma.png)
