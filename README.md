@@ -6,6 +6,10 @@
 
 ![](documentacao/Imagens/Cronograma.png)
 
+# Vídeo Pitch
+
+[Link do Video Pitch](https://www.youtube.com/watch?v=QrldZyljPYo)
+
 # Diagrama de Entidade e Relacionamento (DER)
 
 ![](documentacao/Imagens/DER.png)
