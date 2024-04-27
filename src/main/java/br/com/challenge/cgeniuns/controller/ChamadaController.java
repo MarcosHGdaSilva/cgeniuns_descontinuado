@@ -86,13 +86,13 @@ public class ChamadaController {
         );
     }
     private void verificarExistenciaCpfAtendente(String cpf_atendente){
-        if (atendenteRepository.findByCpf_atendente(cpf_atendente) == null){
+        if (atendenteRepository.findByCpf(cpf_atendente) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente não está cadastrado.");
         }
     }
 
     private void verificarExistenciaCpfCliente(String cpf_cliente){
-        if (clienteRepository.findByCpf_cliente(cpf_cliente) == null){
+        if (clienteRepository.findByCpf(cpf_cliente) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não está cadastrado.");
         }
     }

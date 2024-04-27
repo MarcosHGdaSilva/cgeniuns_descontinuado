@@ -42,7 +42,7 @@ public class AtendenteController {
     @ResponseStatus(CREATED)
     public Atendente create(@RequestBody Atendente atendente){
         log.info("cadastrando atendente: {}", atendente);
-    if (atendenteRepository.findByCpf_atendente(atendente.getCpf_atendente()) == null) {
+    if (atendenteRepository.findByCpf(atendente.getCpf()) == null) {
         return atendenteRepository.save(atendente);
     }else {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente já cadastrado");
@@ -60,7 +60,7 @@ public class AtendenteController {
     @GetMapping("cpf/{cpf_atendente}")
     public ResponseEntity<Atendente> get(@PathVariable String cpf_atendente){
         log.info("Buscar por CPF: {}", cpf_atendente);
-        Atendente atendente = atendenteRepository.findByCpf_atendente(cpf_atendente);
+        Atendente atendente = atendenteRepository.findByCpf(cpf_atendente);
     if (atendente != null) {
         return ResponseEntity.ok(atendente);
     } else {
@@ -83,7 +83,7 @@ public class AtendenteController {
     public void deleteByCpf_atendente (@PathVariable String cpf_atendente){
         log.info("Apagando Atendente com CPF {}", cpf_atendente);
         verificarCpf(cpf_atendente);
-        atendenteRepository.deleteByCpf_atendente(cpf_atendente);
+        atendenteRepository.deleteByCpf(cpf_atendente);
     }
 
     @PutMapping("{id}")
@@ -99,7 +99,7 @@ public class AtendenteController {
         log.info("Atualizando o cadastro do id={} para {}", cpf_atendente, atendente);
         Atendente atendenteSalvo = verificarCpf(cpf_atendente);
         atendenteSalvo.setNome_atendente(atendente.getNome_atendente());
-        atendenteSalvo.setCpf_atendente(atendente.getCpf_atendente());
+        atendenteSalvo.setCpf(atendente.getCpf());
         atendenteSalvo.setSetor(atendente.getSetor());
         atendenteSalvo.setSenha_atendente(atendente.getSenha_atendente());
         atendenteSalvo.setAvaliacao_atendente(atendente.getAvaliacao_atendente());
@@ -114,7 +114,7 @@ public class AtendenteController {
         );
     }
     private Atendente verificarCpf(String cpf_atendente){
-        Atendente atendente = atendenteRepository.findByCpf_atendente(cpf_atendente);
+        Atendente atendente = atendenteRepository.findByCpf(cpf_atendente);
     if (atendente == null) {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente com CPF não encontrado");
     }else{

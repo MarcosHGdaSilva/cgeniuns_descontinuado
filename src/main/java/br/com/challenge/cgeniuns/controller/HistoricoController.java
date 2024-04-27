@@ -81,7 +81,7 @@ public class HistoricoController {
     }
 
     private void verificarExistenciaCpfCliente(String cpf_cliente){
-        if (clienteRepository.findByCpf_cliente(cpf_cliente) == null){
+        if (clienteRepository.findByCpf(cpf_cliente) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não existe no cadastro.");
         }
     }

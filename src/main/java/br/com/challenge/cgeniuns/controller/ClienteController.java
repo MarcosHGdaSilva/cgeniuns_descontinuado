@@ -41,7 +41,7 @@ public class ClienteController {
     @ResponseStatus(CREATED)
     public Cliente create(@RequestBody Cliente cliente){
         log.info("cadastrando cliente: {}", cliente);
-        if (clienteRepository.findByCpf_cliente(cliente.getCpf_cliente()) == null){
+        if (clienteRepository.findByCpf(cliente.getCpf()) == null){
             return clienteRepository.save(cliente);
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente já cadastrado");
@@ -61,7 +61,7 @@ public class ClienteController {
     @GetMapping("cpf/{cpf_cliente}")
     public ResponseEntity<Cliente> get(@PathVariable String cpf_cliente){
         log.info("Buscar por CPF: {}", cpf_cliente);
-        Cliente cliente = clienteRepository.findByCpf_cliente(cpf_cliente);
+        Cliente cliente = clienteRepository.findByCpf(cpf_cliente);
     if (cliente != null) {
         return ResponseEntity.ok(cliente);
     } else {
@@ -83,7 +83,7 @@ public class ClienteController {
     public void deleteByCpf_cliente (@PathVariable String cpf_cliente){
         log.info("Apagando Cliente com CPF {}", cpf_cliente);
         verificarCpf(cpf_cliente);
-        clienteRepository.deleteByCpf_cliente(cpf_cliente);
+        clienteRepository.deleteByCpf(cpf_cliente);
     }
 
     @PutMapping("{id}")
@@ -99,7 +99,7 @@ public class ClienteController {
         log.info("Atualizando o cadastro do pcf={} para {}", cpf_cliente, cliente);
         Cliente clienteSalvo = verificarCpf(cpf_cliente);
         clienteSalvo.setNome_cliente(cliente.getNome_cliente());
-        clienteSalvo.setCpf_cliente(cliente.getCpf_cliente());
+        clienteSalvo.setCpf(cliente.getCpf());
         clienteSalvo.setGenero(cliente.getGenero());
         clienteSalvo.setCep(cliente.getCep());
         clienteSalvo.setTelefone(cliente.getTelefone());
@@ -119,7 +119,7 @@ public class ClienteController {
     }
 
     private Cliente verificarCpf(String cpf_cliente){
-        Cliente cliente = clienteRepository.findByCpf_cliente(cpf_cliente);
+        Cliente cliente = clienteRepository.findByCpf(cpf_cliente);
     if (cliente == null) {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente com CPF não encontrado");
     }else{

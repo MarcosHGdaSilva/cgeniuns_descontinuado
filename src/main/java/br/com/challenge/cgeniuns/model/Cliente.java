@@ -23,7 +23,7 @@ public class Cliente {
 
     @NotBlank(message = "Campo obrigatório")
     @Size(min=11,  message = "CPF Inválido")
-    private String cpf_cliente;
+    private String cpf;
 
     private String genero;
 

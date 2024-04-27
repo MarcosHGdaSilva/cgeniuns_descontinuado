@@ -81,6 +81,7 @@ Apaga a cliente com o `cpf` informado.
 **códigos de status**
 
 `204` apagado com sucesso
+
 `404` id/cpf não encontrado
 
 ---
