@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
+public class Cliente{
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     

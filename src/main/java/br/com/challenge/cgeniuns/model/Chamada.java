@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
@@ -36,9 +36,14 @@ public class Chamada {
 
     private boolean resultado;
 
-    @NotBlank(message="Campo Obrigatório")
-    private String cpf_cliente;
+    // @NotBlank(message="Campo Obrigatório")
+    // private String cpf_cliente;
 
-    @NotBlank(message="Campo Obrigatório")
-    private String cpf_atendente;
+    // @NotBlank(message="Campo Obrigatório")
+    // private String cpf_atendente;
+
+    @ManyToOne
+    private Atendente atendente;
+    @ManyToOne
+    private Cliente cliente;
 }

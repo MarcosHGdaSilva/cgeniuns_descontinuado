@@ -78,16 +78,16 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .hora(LocalTime.of(10,15,30))
                     .duracao(LocalTime.of(00,05,30))
                     .resultado(Boolean.valueOf(true))
-                    .cpf_cliente("12345678910")
-                    .cpf_atendente("32165498710")
+                    .cliente(clienteRepository.findByCpf("12345678910"))
+                    .atendente(atendenteRepository.findByCpf("32165498710"))
                     .build(),
                 Chamada.builder()
                     .dt_chamada(LocalDate.of(2020,01,05))
                     .hora(LocalTime.of(10,15,30))
                     .duracao(LocalTime.of(00,05,30))
                     .resultado(Boolean.valueOf(true))
-                    .cpf_cliente("12345678910")
-                    .cpf_atendente("32165498711")
+                    .cliente(clienteRepository.findByCpf("12345678910"))
+                    .atendente(atendenteRepository.findByCpf("32165498711"))
                     .build()));
         produtoRepository.saveAll(
             List.of(

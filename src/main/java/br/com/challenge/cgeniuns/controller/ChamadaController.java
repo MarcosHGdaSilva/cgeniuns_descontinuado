@@ -3,9 +3,11 @@ package br.com.challenge.cgeniuns.controller;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,11 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.challenge.cgeniuns.model.Atendente;
 import br.com.challenge.cgeniuns.model.Chamada;
+import br.com.challenge.cgeniuns.model.Cliente;
 import br.com.challenge.cgeniuns.repository.AtendenteRepository;
 import br.com.challenge.cgeniuns.repository.ChamadaRepository;
 import br.com.challenge.cgeniuns.repository.ClienteRepository;
@@ -37,8 +42,15 @@ public class ChamadaController {
     AtendenteRepository atendenteRepository;
 
     @GetMapping
-    public List<Chamada> index(){
-        return  chamadaRepository.findAll();
+    public Page<Chamada> index(
+        @RequestParam(required = false) String cpf,
+        @PageableDefault(sort = "dt_chamada", direction = Direction.DESC) Pageable pageable
+    ){
+        if (cpf != null){
+            return chamadaRepository.findByCpf(cpf, pageable);
+        }
+
+        return  chamadaRepository.findAll(pageable);
     }
 
     
@@ -46,8 +58,8 @@ public class ChamadaController {
     @ResponseStatus(CREATED)
     public Chamada create(@RequestBody Chamada chamada){
         log.info("cadastrando chamada: {}", chamada);
-        verificarExistenciaCpfAtendente(chamada.getCpf_atendente());
-        verificarExistenciaCpfCliente(chamada.getCpf_cliente());
+        verificarExistenciaCpfAtendente(chamada.getAtendente());
+        verificarExistenciaCpfCliente(chamada.getCliente());
         return  chamadaRepository.save(chamada);
     }
 
@@ -72,8 +84,8 @@ public class ChamadaController {
     public  Chamada update(@PathVariable Long id, @RequestBody Chamada chamada){
         log.info("Atualizando o cadastro do id={} para {}", id, chamada);
         verificarExistencia(id);
-        verificarExistenciaCpfAtendente(chamada.getCpf_atendente());
-        verificarExistenciaCpfCliente(chamada.getCpf_cliente());
+        verificarExistenciaCpfAtendente(chamada.getAtendente());
+        verificarExistenciaCpfCliente(chamada.getCliente());
         chamada.setId(id);
         return chamadaRepository.save(chamada);
     }
@@ -85,14 +97,14 @@ public class ChamadaController {
             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não encontrado")
         );
     }
-    private void verificarExistenciaCpfAtendente(String cpf_atendente){
-        if (atendenteRepository.findByCpf(cpf_atendente) == null){
+    private void verificarExistenciaCpfAtendente(Atendente atendente){
+        if (atendenteRepository.findByCpf(atendente.getCpf()) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Atendente não está cadastrado.");
         }
     }
 
-    private void verificarExistenciaCpfCliente(String cpf_cliente){
-        if (clienteRepository.findByCpf(cpf_cliente) == null){
+    private void verificarExistenciaCpfCliente(Cliente cliente){
+        if (clienteRepository.findByCpf(cliente.getCpf()) == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não está cadastrado.");
         }
     }
