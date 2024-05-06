@@ -61,14 +61,14 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .nome_atendente("João")
                     .cpf("32165498710")
                     .setor("vendas")
-                    .senha_atendente("654321")
+                    .senha("654321")
                     .avaliacao_atendente(4)
                     .build(),
                 Atendente.builder()
                     .nome_atendente("Pedro")
                     .cpf("32165498711")
                     .setor("vendas")
-                    .senha_atendente("654321")
+                    .senha("654321")
                     .avaliacao_atendente(4)
                     .build()));
         chamadaRepository.saveAll(
@@ -82,7 +82,7 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .atendente(atendenteRepository.findByCpf("32165498710"))
                     .build(),
                 Chamada.builder()
-                    .dt_chamada(LocalDate.of(2020,01,05))
+                    .dt_chamada(LocalDate.of(2021,01,05))
                     .hora(LocalTime.of(10,15,30))
                     .duracao(LocalTime.of(00,05,30))
                     .resultado(Boolean.valueOf(true))

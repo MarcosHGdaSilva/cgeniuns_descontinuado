@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
@@ -30,4 +31,7 @@ public class Produto {
     
     @PositiveOrZero(message = "O valor do produto deve ser positivo")
     private BigDecimal valor_produto;
+
+    @ManyToOne
+    private Historico historico;
 }

@@ -36,12 +36,6 @@ public class Chamada {
 
     private boolean resultado;
 
-    // @NotBlank(message="Campo Obrigatório")
-    // private String cpf_cliente;
-
-    // @NotBlank(message="Campo Obrigatório")
-    // private String cpf_atendente;
-
     @ManyToOne
     private Atendente atendente;
     @ManyToOne

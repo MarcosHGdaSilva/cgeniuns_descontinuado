@@ -34,7 +34,7 @@ public class Atendente {
 
     @NotBlank(message = "Campo obrigatório")
     @Size(min = 6, message = "Mínimo de 6 caracteres")
-    private String senha_atendente;
+    private String senha;
 
     @PositiveOrZero(message = "A avaliação deve ser um número positivo")
     @Max(value = 5, message = "A avaliação deve ser um número entre 0 e 5")

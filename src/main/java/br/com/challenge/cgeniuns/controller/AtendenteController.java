@@ -23,6 +23,8 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.challenge.cgeniuns.model.Atendente;
 import br.com.challenge.cgeniuns.repository.AtendenteRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -66,7 +68,12 @@ public class AtendenteController {
     } else {
         return ResponseEntity.notFound().build();
     }
-}
+    }
+    @GetMapping("login")
+    public Atendente Login(@RequestParam String cpf, String senha) {
+        return atendenteRepository.login(cpf, senha);
+    }
+    
     
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
@@ -101,7 +108,7 @@ public class AtendenteController {
         atendenteSalvo.setNome_atendente(atendente.getNome_atendente());
         atendenteSalvo.setCpf(atendente.getCpf());
         atendenteSalvo.setSetor(atendente.getSetor());
-        atendenteSalvo.setSenha_atendente(atendente.getSenha_atendente());
+        atendenteSalvo.setSenha(atendente.getSenha());
         atendenteSalvo.setAvaliacao_atendente(atendente.getAvaliacao_atendente());
         return atendenteRepository.save(atendenteSalvo);
     }
