@@ -11,11 +11,5 @@ public interface AtendenteRepository extends JpaRepository<Atendente, Long> {
 
     @Query("SELECT a FROM Atendente a WHERE a.cpf = :cpf and a.senha = :senha")
     Atendente login(String cpf, String senha);
-    // @Query("SELECT atendente FROM Atendente atendente WHERE atendente.cpf_atendente = :cpf_atendente")
-    // Atendente findByCpf(@Param("cpf_atendente") String cpf_atendente);
-    // @Modifying
-    // @Transactional
-    // @Query("DELETE FROM Atendente atendente WHERE atendente.cpf_atendente = :cpf_atendente")
-    // void deleteByCpf_atendente(@Param("cpf_atendente") String cpf_atendente);
     
 }

@@ -9,8 +9,7 @@ import org.springframework.data.repository.query.Param;
 import br.com.challenge.cgeniuns.model.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
-    @Query("SELECT p FROM Produto p WHERE p.historico.cpf = :cpf")
+    @Query("SELECT p FROM Produto p WHERE p.historico.cpfCliente = :cpf")
     Page<Produto> findByCpf(@Param("cpf") String cpf, Pageable pageable);
 
-    Page<Produto> findById(@Param("id") Long id, Pageable pageable);
 }

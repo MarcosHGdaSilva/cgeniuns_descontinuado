@@ -39,14 +39,10 @@ public class ProdutoController {
     @GetMapping
     public Page<Produto> index(
         @RequestParam(required = false) String cpf,
-        @RequestParam(required = false) Long id,
-        @PageableDefault(sort = "dt_compra", direction = Direction.DESC) Pageable pageable
+        @PageableDefault(sort = "id", direction = Direction.DESC) Pageable pageable
     ){
         if (cpf != null){
             return produtoRepository.findByCpf(cpf, pageable);
-        }
-        if (id != null){
-            return produtoRepository.findById(id, pageable);
         }
         return  produtoRepository.findAll(pageable);
     }

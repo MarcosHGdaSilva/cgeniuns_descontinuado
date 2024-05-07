@@ -55,6 +55,17 @@ public class HistoricoController {
         .orElse(ResponseEntity.notFound().build());
     }
     
+    @GetMapping("cpf/{cpfCliente}")
+    public ResponseEntity<Historico> get(@PathVariable String cpfCliente){
+        log.info("Buscar por CPF: {}", cpfCliente);
+        Historico historico = historicoRepository.findByCpfCliente(cpfCliente);
+    if (historico != null) {
+        return ResponseEntity.ok(historico);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+    }
+    
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     public void destroy (@PathVariable Long id){

@@ -45,7 +45,7 @@ public class DatabaseSeeder implements CommandLineRunner{
         clienteRepository.saveAll(
             List.of(
                 Cliente.builder()
-                .nome_cliente("Gabriel")
+                .nome_cliente("John Doe")
                 .cpf("12345678910")
                 .genero("masculino")
                 .cep ("12345678")
@@ -95,21 +95,25 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .descricao_produto("Descrição do Produto X")
                     .nome_produto("produto X")
                     .valor_produto(new BigDecimal(123.45))
+                    .historico(historicoRepository.findByCpfCliente("12345678910"))
                     .build(),
                 Produto.builder()
                     .descricao_produto("Descrição do Produto Y")
                     .nome_produto("produto X")
                     .valor_produto(new BigDecimal(3215.45))
+                    .historico(historicoRepository.findByCpfCliente("12345678910"))
                     .build(),
                 Produto.builder()
                     .descricao_produto("Descrição do Produto Z")
                     .nome_produto("produto X")
                     .valor_produto(new BigDecimal(9851.45))
+                    .historico(historicoRepository.findByCpfCliente("12345678910"))
                     .build(),
                 Produto.builder()
                     .descricao_produto("Descrição do Serviço Ae")
                     .nome_produto("Serviço Ae")
                     .valor_produto(new BigDecimal(1298.45))
+                    .historico(historicoRepository.findByCpfCliente("12345678910"))
                     .build()                
                     ));
         historicoRepository.saveAll(
