@@ -74,7 +74,7 @@ public class DatabaseSeeder implements CommandLineRunner{
         chamadaRepository.saveAll(
             List.of(
                 Chamada.builder()
-                    .dt_chamada(LocalDate.of(2020,01,05))
+                    .dtChamada(LocalDate.of(2020,01,05))
                     .hora(LocalTime.of(10,15,30))
                     .duracao(LocalTime.of(00,05,30))
                     .resultado(Boolean.valueOf(true))
@@ -82,12 +82,19 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .atendente(atendenteRepository.findByCpf("32165498710"))
                     .build(),
                 Chamada.builder()
-                    .dt_chamada(LocalDate.of(2021,01,05))
+                    .dtChamada(LocalDate.of(2021,01,05))
                     .hora(LocalTime.of(10,15,30))
                     .duracao(LocalTime.of(00,05,30))
                     .resultado(Boolean.valueOf(true))
                     .cliente(clienteRepository.findByCpf("12345678910"))
                     .atendente(atendenteRepository.findByCpf("32165498711"))
+                    .build()));
+        historicoRepository.saveAll(
+            List.of(
+                Historico.builder()
+                    .idProduto(Long.valueOf(1))
+                    .cpfCliente("12345678910")
+                    .dtCompra(LocalDate.of(2020,01,05))
                     .build()));
         produtoRepository.saveAll(
             List.of(
@@ -116,20 +123,13 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .historico(historicoRepository.findByCpfCliente("12345678910"))
                     .build()                
                     ));
-        historicoRepository.saveAll(
-            List.of(
-                Historico.builder()
-                    .idProduto(Long.valueOf(1))
-                    .cpfCliente("12345678910")
-                    .dtCompra(LocalDate.of(2020,01,05))
-                    .build()));
         scriptRepository.saveAll(
             List.of(
                 Script.builder()
                     .id_compra(Long.valueOf(1))
                     .id_produto(Long.valueOf(1))
                     .id_chamada(Long.valueOf(1))
-                    .cpf_cliente("12345678910")
+                    .cpfCliente("12345678910")
                     .descricao_script("Descrição do Script")
                     .build()));
     }

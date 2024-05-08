@@ -1,9 +1,9 @@
 package br.com.challenge.cgeniuns.controller;
 
-import java.util.List;
-
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,8 +51,8 @@ public class ScriptController {
         log.info("cadastrando script: {}", script);
         verificarExistenciaHistorico(script.getId_compra());
         verificarExistenciaIdChamada(script.getId_chamada());
-        verificarExistenciaCliente(script.getCpf_cliente());
-        return  scriptRepository.save(script);
+        verificarExistenciaCliente(script.getCpfCliente());
+        return scriptRepository.save(script);
     }
 
     @GetMapping("{id}")
@@ -62,6 +62,17 @@ public class ScriptController {
         .findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("cpf/{cpf}")
+    public ResponseEntity<Script> get(@PathVariable String cpf){
+        log.info("Buscar por id: {}", cpf);
+        Script script = scriptRepository.findByCpf_cliente(cpf);
+    if (script != null) {
+        return ResponseEntity.ok(script);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
     }
     
     @DeleteMapping("{id}")

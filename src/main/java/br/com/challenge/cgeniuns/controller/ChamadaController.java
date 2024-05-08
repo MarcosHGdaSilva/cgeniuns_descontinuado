@@ -44,7 +44,7 @@ public class ChamadaController {
     @GetMapping
     public Page<Chamada> index(
         @RequestParam(required = false) String cpf,
-        @PageableDefault(sort = "dt_chamada", direction = Direction.DESC) Pageable pageable
+        @PageableDefault(sort = "dtChamada", direction = Direction.DESC) Pageable pageable
     ){
         if (cpf != null){
             return chamadaRepository.findByCpf(cpf, pageable);

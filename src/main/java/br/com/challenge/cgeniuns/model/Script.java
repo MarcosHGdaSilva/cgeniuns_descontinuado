@@ -30,7 +30,7 @@ public class Script {
     private Long id_chamada;
     
     @NotBlank(message="Campo Obrigatório")
-    private String cpf_cliente;
+    private String cpfCliente;
 
     @NotBlank(message="Campo Obrigatório")
     private String descricao_script;

@@ -26,7 +26,7 @@ public class Chamada {
 
     @NotNull(message="Campo Obrigatório")
     @PastOrPresent(message="hora inválida")
-    private LocalDate dt_chamada;
+    private LocalDate dtChamada;
 
     @NotNull(message="Campo Obrigatório")
     private LocalTime hora;
