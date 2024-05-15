@@ -54,7 +54,19 @@ public class DatabaseSeeder implements CommandLineRunner{
                 .preferencia_contato ("Manhã")
                 .dtNascimento(LocalDate.of(2020,02,03))
                 .senha_user ("123456")
+                .build(),
+                Cliente.builder()
+                .nome_cliente("Jane Doe")
+                .cpf("12345678911")
+                .genero("feminino")
+                .cep ("12345678")
+                .telefone ("912345678")
+                .email ("teste@gmail.com")
+                .preferencia_contato ("Tarde")
+                .dtNascimento(LocalDate.of(2020,02,03))
+                .senha_user ("123456")
                 .build()));
+
         atendenteRepository.saveAll(
             List.of(
                 Atendente.builder()
@@ -70,6 +82,13 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .setor("vendas")
                     .senha("654321")
                     .avaliacao_atendente(4)
+                    .build(),
+                Atendente.builder()
+                    .nome_atendente("Anninha LINDA")
+                    .cpf("53928799851")
+                    .setor("desenvolvimento")
+                    .senha("654321")
+                    .avaliacao_atendente(5)
                     .build()));
         chamadaRepository.saveAll(
             List.of(

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import br.com.challenge.cgeniuns.repository.ClienteRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@CrossOrigin(origins = {"*"}, maxAge = 3600)
 @RequestMapping("cliente")
 @Slf4j
 public class ClienteController {
@@ -33,7 +35,7 @@ public class ClienteController {
     ClienteRepository clienteRepository;
 
     @GetMapping
-    public List<Cliente> index(){
+    public List<Cliente> index() {
         return clienteRepository.findAll();
     }
 
