@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import br.com.challenge.cgeniuns.repository.ScriptRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@CrossOrigin(origins = {"*"}, maxAge = 3600)
 @RequestMapping("script")
 @Slf4j
 public class ScriptController {

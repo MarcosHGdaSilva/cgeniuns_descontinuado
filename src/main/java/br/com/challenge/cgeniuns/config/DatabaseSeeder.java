@@ -86,7 +86,7 @@ public class DatabaseSeeder implements CommandLineRunner{
                 Atendente.builder()
                     .nome_atendente("Anninha LINDA")
                     .cpf("53928799851")
-                    .setor("desenvolvimento")
+                    .setor("vendas")
                     .senha("654321")
                     .avaliacao_atendente(5)
                     .build()));
@@ -150,6 +150,13 @@ public class DatabaseSeeder implements CommandLineRunner{
                     .id_chamada(Long.valueOf(1))
                     .cpfCliente("12345678910")
                     .descricao_script("Descrição do Script")
+                    .build(),
+                Script.builder()
+                    .id_compra(Long.valueOf(2))
+                    .id_produto(Long.valueOf(2))
+                    .id_chamada(Long.valueOf(2))
+                    .cpfCliente("12345678911")
+                    .descricao_script("Anna é maior desenvolvedora do mundo")
                     .build()));
     }
     
