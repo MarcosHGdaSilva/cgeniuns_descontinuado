@@ -6,10 +6,10 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,24 +23,34 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.challenge.cgeniuns.model.Cliente;
 import br.com.challenge.cgeniuns.repository.ClienteRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin(origins = {"*"}, maxAge = 3600)
 @RequestMapping("cliente")
 @Slf4j
+@CacheConfig(cacheNames = "clientes")
+@Tag(name = "clientes", description = "Endpoint relacionado com clientes")
 public class ClienteController {
     
     @Autowired
     ClienteRepository clienteRepository;
 
     @GetMapping
-    public List<Cliente> index() {
+    @Operation(summary = "Lista todos os clientes cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo cliente")
+    public List<Cliente> index(){
         return clienteRepository.findAll();
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Erro de validação do cliente"),
+            @ApiResponse(responseCode = "201", description = "Cliente cadastrado com sucesso")
+    })
     public Cliente create(@RequestBody Cliente cliente){
         log.info("cadastrando cliente: {}", cliente);
         if (clienteRepository.findByCpf(cliente.getCpf()) == null){

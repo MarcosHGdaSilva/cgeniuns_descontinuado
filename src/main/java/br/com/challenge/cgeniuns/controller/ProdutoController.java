@@ -25,11 +25,16 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.challenge.cgeniuns.model.Produto;
 import br.com.challenge.cgeniuns.repository.HistoricoRepository;
 import br.com.challenge.cgeniuns.repository.ProdutoRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("produto")
 @Slf4j
+@Tag(name = "produtos", description = "Endpoint relacionado com produtos")
 public class ProdutoController {
     @Autowired
     ProdutoRepository produtoRepository;
@@ -37,6 +42,7 @@ public class ProdutoController {
     HistoricoRepository historicoRepository;
 
     @GetMapping
+    @Operation(summary = "Lista todos os produtos cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo produto")
     public Page<Produto> index(
         @RequestParam(required = false) String cpf,
         @PageableDefault(sort = "id", direction = Direction.DESC) Pageable pageable
@@ -49,6 +55,10 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Erro de validação do produto"),
+            @ApiResponse(responseCode = "201", description = "Produto cadastrado com sucesso")
+    })
     public Produto create(@RequestBody Produto produto){
         log.info("cadastrando produto: {}", produto);
         return  produtoRepository.save(produto);

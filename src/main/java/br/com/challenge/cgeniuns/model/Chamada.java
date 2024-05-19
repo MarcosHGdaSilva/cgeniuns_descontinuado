@@ -40,4 +40,5 @@ public class Chamada {
     private Atendente atendente;
     @ManyToOne
     private Cliente cliente;
+
 }

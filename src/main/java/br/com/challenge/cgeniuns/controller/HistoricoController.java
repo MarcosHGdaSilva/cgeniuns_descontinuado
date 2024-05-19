@@ -22,11 +22,16 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.challenge.cgeniuns.model.Historico;
 import br.com.challenge.cgeniuns.repository.ClienteRepository;
 import br.com.challenge.cgeniuns.repository.HistoricoRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("historico")
 @Slf4j
+@Tag(name = "historicos", description = "Endpoint relacionado com historicos")
 public class HistoricoController {
     @Autowired
     HistoricoRepository historicoRepository;
@@ -34,12 +39,17 @@ public class HistoricoController {
     ClienteRepository clienteRepository;
 
     @GetMapping
+    @Operation(summary = "Lista todos os historicos cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo historico")
     public List<Historico> index(){
         return  historicoRepository.findAll();
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Erro de validação do historico"),
+            @ApiResponse(responseCode = "201", description = "Historico cadastrado com sucesso")
+    })
     public Historico create(@RequestBody Historico historico){
         log.info("cadastrando historico: {}", historico);
         verificarExistenciaCpfCliente(historico.getCpfCliente());

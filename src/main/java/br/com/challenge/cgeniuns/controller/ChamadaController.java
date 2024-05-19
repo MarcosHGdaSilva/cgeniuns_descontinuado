@@ -3,6 +3,7 @@ package br.com.challenge.cgeniuns.controller;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,11 +29,14 @@ import br.com.challenge.cgeniuns.model.Cliente;
 import br.com.challenge.cgeniuns.repository.AtendenteRepository;
 import br.com.challenge.cgeniuns.repository.ChamadaRepository;
 import br.com.challenge.cgeniuns.repository.ClienteRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("chamada")
 @Slf4j
+@Tag(name = "chamadas", description = "Endpoint relacionado com chamadas")
 public class ChamadaController {
     @Autowired
     ChamadaRepository chamadaRepository;
@@ -42,9 +46,10 @@ public class ChamadaController {
     AtendenteRepository atendenteRepository;
 
     @GetMapping
+    @Operation(summary = "Lista todos os chamadas cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo chamada")
     public Page<Chamada> index(
         @RequestParam(required = false) String cpf,
-        @PageableDefault(sort = "dtChamada", direction = Direction.DESC) Pageable pageable
+        @ParameterObject @PageableDefault(sort = "dtChamada", direction = Direction.DESC) Pageable pageable
     ){
         if (cpf != null){
             return chamadaRepository.findByCpf(cpf, pageable);
