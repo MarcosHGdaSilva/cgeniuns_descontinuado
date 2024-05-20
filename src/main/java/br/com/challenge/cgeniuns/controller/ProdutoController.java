@@ -43,6 +43,10 @@ public class ProdutoController {
 
     @GetMapping
     @Operation(summary = "Lista todos os produtos cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo produto")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de produtos retornada com sucesso"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public Page<Produto> index(
         @RequestParam(required = false) String cpf,
         @PageableDefault(sort = "id", direction = Direction.DESC) Pageable pageable
@@ -55,9 +59,11 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @Operation(summary = "Cria um novo produto.", description = "Endpoint para criar um novo produto")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Erro de validação do produto"),
-            @ApiResponse(responseCode = "201", description = "Produto cadastrado com sucesso")
+        @ApiResponse(responseCode = "201", description = "Produto cadastrado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro de validação do produto"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public Produto create(@RequestBody Produto produto){
         log.info("cadastrando produto: {}", produto);
@@ -66,6 +72,11 @@ public class ProdutoController {
 
     @GetMapping("{id}")
     @Operation(summary = "Lista todos os produtos cadastrados no sistema.", description = "Endpoint que retorna um objetos do tipo produto com um id informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Produto encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<Produto> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return  produtoRepository
@@ -76,6 +87,12 @@ public class ProdutoController {
     
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @Operation(summary = "Deleta um produto pelo ID.", description = "Endpoint que deleta um produto com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Produto deletado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
 
@@ -84,6 +101,13 @@ public class ProdutoController {
     }
 
     @PutMapping("{id}")
+    @Operation(summary = "Atualiza um produto pelo ID.", description = "Endpoint que atualiza um produto com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro de validação do produto"),
+        @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public  Produto update(@PathVariable Long id, @RequestBody Produto produto){
         log.info("Atualizando o cadastro do id={} para {}", id, produto);
 

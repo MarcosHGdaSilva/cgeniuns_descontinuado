@@ -47,6 +47,10 @@ public class AtendenteController {
     @GetMapping
     @Cacheable
     @Operation(summary = "Lista todos os atendentes cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo atendente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de atendentes retornada com sucesso"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public List<Atendente> index(){
         return atendenteRepository.findAll();
     }
@@ -54,10 +58,13 @@ public class AtendenteController {
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Cria um novo atendente.", description = "Endpoint para criar um novo atendente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Erro de validação do atendentes"),
-            @ApiResponse(responseCode = "201", description = "Atendentes cadastrado com sucesso")
-    })
+        @ApiResponse(responseCode = "201", description = "Atendente cadastrado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro de validação do atendente"),
+        @ApiResponse(responseCode = "409", description = "Atendente já cadastrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public Atendente create(@RequestBody Atendente atendente){
         log.info("cadastrando atendente: {}", atendente);
     if (atendenteRepository.findByCpf(atendente.getCpf()) == null) {
@@ -69,6 +76,11 @@ public class AtendenteController {
 
     @GetMapping("{id}")
     @Operation(summary = "Retorna um atendente especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo atendente com um id informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Atendente encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Atendente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public ResponseEntity<Atendente> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return atendenteRepository
@@ -78,6 +90,11 @@ public class AtendenteController {
     }
     @GetMapping("cpf/{cpf_atendente}")
     @Operation(summary = "Retorna um atendente especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo atendente com um cpf informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Atendente encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Atendente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public ResponseEntity<Atendente> get(@PathVariable String cpf_atendente){
         log.info("Buscar por CPF: {}", cpf_atendente);
         Atendente atendente = atendenteRepository.findByCpf(cpf_atendente);
@@ -89,6 +106,11 @@ public class AtendenteController {
     }
     @GetMapping("login")
     @Operation(summary = "Realiza o login de um atendente cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo atendente com um cpf e uma senha informados")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Login realizado com sucesso"),
+        @ApiResponse(responseCode = "401", description = "Credenciais inválidas"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public Atendente Login(@RequestParam String cpf, @RequestParam String senha) {
         return atendenteRepository.login(cpf, senha);
     }
@@ -98,6 +120,11 @@ public class AtendenteController {
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
     @Operation(summary = "Deleta um atendente pelo ID.", description = "Endpoint que deleta um atendente com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Atendente deletado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Atendente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
 
@@ -110,6 +137,11 @@ public class AtendenteController {
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
     @Operation(summary = "Deleta um atendente pelo CPF.", description = "Endpoint que deleta um atendente com um CPF informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Atendente deletado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Atendente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public void deleteByCpf_atendente (@PathVariable String cpf_atendente){
         log.info("Apagando Atendente com CPF {}", cpf_atendente);
         verificarCpf(cpf_atendente);
@@ -119,6 +151,11 @@ public class AtendenteController {
     @PutMapping("{id}")
     @CacheEvict(allEntries = true)
     @Operation(summary = "Atualiza um atendente pelo ID.", description = "Endpoint que atualiza um atendente com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Atendente atualizado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Atendente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public Atendente update(@PathVariable Long id, @RequestBody Atendente atendente){
         log.info("Atualizando o cadastro do id={} para {}", id, atendente);
         verificarId(id);
@@ -129,6 +166,11 @@ public class AtendenteController {
     @PutMapping("cpf/{cpf_atendente}")
     @CacheEvict(allEntries = true)
     @Operation(summary = "Atualiza um atendente pelo CPF.", description = "Endpoint que atualiza um atendente com um CPF informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Atendente atualizado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Atendente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+})
     public Atendente update(@PathVariable String cpf_atendente, @RequestBody Atendente atendente){
         log.info("Atualizando o cadastro do id={} para {}", cpf_atendente, atendente);
         Atendente atendenteSalvo = verificarCpf(cpf_atendente);

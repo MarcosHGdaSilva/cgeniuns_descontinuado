@@ -63,6 +63,7 @@ public class ChamadaController {
     
     @PostMapping
     @ResponseStatus(CREATED)
+    @Operation(summary = "Cria uma nova chamada.", description = "Endpoint que cria uma nova chamada no sistema.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "400", description = "Erro de validação do chamadas"),
             @ApiResponse(responseCode = "201", description = "Chamada cadastrado com sucesso")
@@ -76,6 +77,10 @@ public class ChamadaController {
 
     @GetMapping("{id}")
     @Operation(summary = "Retorna um chamada especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo chamada com um id informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Chamada encontrada"),
+        @ApiResponse(responseCode = "404", description = "Chamada não encontrada")
+})
     public ResponseEntity<Chamada> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return  chamadaRepository
@@ -86,6 +91,11 @@ public class ChamadaController {
     
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @Operation(summary = "Remove uma chamada do sistema.", description = "Endpoint que remove uma chamada do sistema.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Chamada removida com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Chamada não encontrada")
+    })
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
         verificarExistencia(id);
@@ -93,6 +103,11 @@ public class ChamadaController {
     }
 
     @PutMapping("{id}")
+    @Operation(summary = "Atualiza uma chamada existente.", description = "Endpoint que atualiza uma chamada existente no sistema.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Chamada atualizada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Chamada não encontrada")
+    })
     public  Chamada update(@PathVariable Long id, @RequestBody Chamada chamada){
         log.info("Atualizando o cadastro do id={} para {}", id, chamada);
         verificarExistencia(id);

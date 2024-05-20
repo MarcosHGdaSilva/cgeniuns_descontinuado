@@ -43,15 +43,21 @@ public class ClienteController {
 
     @GetMapping
     @Operation(summary = "Lista todos os clientes cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo cliente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de clientes retornada com sucesso"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public List<Cliente> index(){
         return clienteRepository.findAll();
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @Operation(summary = "Lista todos os clientes cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo cliente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Erro de validação do cliente"),
-            @ApiResponse(responseCode = "201", description = "Cliente cadastrado com sucesso")
+        @ApiResponse(responseCode = "201", description = "Cliente cadastrado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro de validação do cliente"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public Cliente create(@RequestBody Cliente cliente){
         log.info("cadastrando cliente: {}", cliente);
@@ -65,6 +71,11 @@ public class ClienteController {
 
     @GetMapping("{id}")
     @Operation(summary = "Retorna um cliente especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo cliente com um id informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<Cliente> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return clienteRepository
@@ -75,6 +86,11 @@ public class ClienteController {
 
     @GetMapping("cpf/{cpf_cliente}")
     @Operation(summary = "Retorna um cliente especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo cliente com um cpf informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<Cliente> get(@PathVariable String cpf_cliente){
         log.info("Buscar por CPF: {}", cpf_cliente);
         Cliente cliente = clienteRepository.findByCpf(cpf_cliente);
@@ -87,6 +103,12 @@ public class ClienteController {
     
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @Operation(summary = "Deleta um cliente pelo ID.", description = "Endpoint que deleta um cliente com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Cliente deletado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
         verificarId(id);
@@ -96,6 +118,12 @@ public class ClienteController {
     @Transactional
     @DeleteMapping("cpf/{cpf_cliente}")
     @ResponseStatus(NO_CONTENT)
+    @Operation(summary = "Deleta um cliente pelo CPF.", description = "Endpoint que deleta um cliente com um CPF informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Cliente deletado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public void deleteByCpf_cliente (@PathVariable String cpf_cliente){
         log.info("Apagando Cliente com CPF {}", cpf_cliente);
         verificarCpf(cpf_cliente);
@@ -103,6 +131,13 @@ public class ClienteController {
     }
 
     @PutMapping("{id}")
+    @Operation(summary = "Atualiza um cliente pelo ID.", description = "Endpoint que atualiza um cliente com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro de validação do cliente"),
+        @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente){
         log.info("Atualizando o cadastro do id={} para {}", id, cliente);
         verificarId(id);
@@ -111,6 +146,13 @@ public class ClienteController {
     }
 
     @PutMapping("cpf/{cpf_cliente}")
+    @Operation(summary = "Atualiza um cliente pelo CPF.", description = "Endpoint que atualiza um cliente com um CPF informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro de validação do cliente"),
+        @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public Cliente update(@PathVariable String cpf_cliente, @RequestBody Cliente cliente){
         log.info("Atualizando o cadastro do pcf={} para {}", cpf_cliente, cliente);
         Cliente clienteSalvo = verificarCpf(cpf_cliente);

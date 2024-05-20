@@ -49,15 +49,22 @@ public class ScriptController {
 
     @GetMapping
     @Operation(summary = "Lista todos os scripts cadastrados no sistema.", description = "Endpoint que retorna um array de objetos do tipo script")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de scripts retornada com sucesso"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public List<Script> index(){
         return  scriptRepository.findAll();
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @Operation(summary = "Cria um novo script.", description = "Endpoint para criar um novo script")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Erro de validação do script"),
-            @ApiResponse(responseCode = "201", description = "Script cadastrado com sucesso")
+        @ApiResponse(responseCode = "201", description = "Script cadastrado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro de validação do script"),
+        @ApiResponse(responseCode = "404", description = "Histórico, chamada ou cliente não encontrados"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public Script create(@RequestBody Script script){
         log.info("cadastrando script: {}", script);
@@ -69,6 +76,11 @@ public class ScriptController {
 
     @GetMapping("{id}")
     @Operation(summary = "Retorna um script especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo script com um id informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Script encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Script não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<Script> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return  scriptRepository
@@ -79,6 +91,11 @@ public class ScriptController {
 
     @GetMapping("cpf/{cpf}")
     @Operation(summary = "Retorna um script especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo script com um cpf informado relacionado a um cliente ou atendente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Script encontrado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Script não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<Script> get(@PathVariable String cpf){
         log.info("Buscar por id: {}", cpf);
         Script script = scriptRepository.findByCpf_cliente(cpf);
@@ -92,6 +109,11 @@ public class ScriptController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @Operation(summary = "Deleta um script pelo ID.", description = "Endpoint que deleta um script com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Script deletado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Script não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
 
@@ -102,10 +124,11 @@ public class ScriptController {
     @PutMapping("{id}")
     @Operation(summary = "Atualiza um script pelo ID.", description = "Endpoint que atualiza um script com um ID informado")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "400", description = "Erro de validação do script"),
         @ApiResponse(responseCode = "200", description = "Script atualizado com sucesso"),
-        @ApiResponse(responseCode = "404", description = "Script não encontrado")
-})
+        @ApiResponse(responseCode = "400", description = "Erro de validação do script"),
+        @ApiResponse(responseCode = "404", description = "Script não encontrado"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public  Script update(@PathVariable Long id, @RequestBody Script script){
         log.info("Atualizando o cadastro do id={} para {}", id, script);
         verificarExistencia(id);
