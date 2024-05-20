@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@CrossOrigin(origins = {"*"}, maxAge = 3600)
 @RequestMapping("script")
 @Slf4j
 @Tag(name = "scripts", description = "Endpoint relacionado com scripts")
@@ -89,6 +91,7 @@ public class ScriptController {
     
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @Operation(summary = "Deleta um script pelo ID.", description = "Endpoint que deleta um script com um ID informado")
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
 
@@ -97,6 +100,12 @@ public class ScriptController {
     }
 
     @PutMapping("{id}")
+    @Operation(summary = "Atualiza um script pelo ID.", description = "Endpoint que atualiza um script com um ID informado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "400", description = "Erro de validação do script"),
+        @ApiResponse(responseCode = "200", description = "Script atualizado com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Script não encontrado")
+})
     public  Script update(@PathVariable Long id, @RequestBody Script script){
         log.info("Atualizando o cadastro do id={} para {}", id, script);
         verificarExistencia(id);

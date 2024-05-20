@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@CrossOrigin(origins = {"*"}, maxAge = 3600)
 @RequestMapping("atendente")
 @Slf4j
 @CacheConfig(cacheNames = "atendentes")
@@ -86,8 +88,8 @@ public class AtendenteController {
     }
     }
     @GetMapping("login")
-    @Operation(summary = "Retorna um atendente especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo atendente com um cpf e uma senha informados")
-    public Atendente Login(@RequestParam String cpf, String senha) {
+    @Operation(summary = "Realiza o login de um atendente cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo atendente com um cpf e uma senha informados")
+    public Atendente Login(@RequestParam String cpf, @RequestParam String senha) {
         return atendenteRepository.login(cpf, senha);
     }
     
@@ -95,6 +97,7 @@ public class AtendenteController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Deleta um atendente pelo ID.", description = "Endpoint que deleta um atendente com um ID informado")
     public void destroy (@PathVariable Long id){
         log.info("Apagando id {}", id);
 
@@ -106,6 +109,7 @@ public class AtendenteController {
     @DeleteMapping("cpf/{cpf_atendente}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Deleta um atendente pelo CPF.", description = "Endpoint que deleta um atendente com um CPF informado")
     public void deleteByCpf_atendente (@PathVariable String cpf_atendente){
         log.info("Apagando Atendente com CPF {}", cpf_atendente);
         verificarCpf(cpf_atendente);
@@ -114,6 +118,7 @@ public class AtendenteController {
 
     @PutMapping("{id}")
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Atualiza um atendente pelo ID.", description = "Endpoint que atualiza um atendente com um ID informado")
     public Atendente update(@PathVariable Long id, @RequestBody Atendente atendente){
         log.info("Atualizando o cadastro do id={} para {}", id, atendente);
         verificarId(id);
@@ -123,6 +128,7 @@ public class AtendenteController {
 
     @PutMapping("cpf/{cpf_atendente}")
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Atualiza um atendente pelo CPF.", description = "Endpoint que atualiza um atendente com um CPF informado")
     public Atendente update(@PathVariable String cpf_atendente, @RequestBody Atendente atendente){
         log.info("Atualizando o cadastro do id={} para {}", cpf_atendente, atendente);
         Atendente atendenteSalvo = verificarCpf(cpf_atendente);
