@@ -62,6 +62,7 @@ public class ClienteController {
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Retorna um cliente especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo cliente com um id informado")
     public ResponseEntity<Cliente> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return clienteRepository
@@ -71,6 +72,7 @@ public class ClienteController {
     }
 
     @GetMapping("cpf/{cpf_cliente}")
+    @Operation(summary = "Retorna um cliente especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo cliente com um cpf informado")
     public ResponseEntity<Cliente> get(@PathVariable String cpf_cliente){
         log.info("Buscar por CPF: {}", cpf_cliente);
         Cliente cliente = clienteRepository.findByCpf(cpf_cliente);

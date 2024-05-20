@@ -30,6 +30,8 @@ import br.com.challenge.cgeniuns.repository.AtendenteRepository;
 import br.com.challenge.cgeniuns.repository.ChamadaRepository;
 import br.com.challenge.cgeniuns.repository.ClienteRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,6 +63,10 @@ public class ChamadaController {
     
     @PostMapping
     @ResponseStatus(CREATED)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Erro de validação do chamadas"),
+            @ApiResponse(responseCode = "201", description = "Chamada cadastrado com sucesso")
+    })
     public Chamada create(@RequestBody Chamada chamada){
         log.info("cadastrando chamada: {}", chamada);
         verificarExistenciaCpfAtendente(chamada.getAtendente());
@@ -69,6 +75,7 @@ public class ChamadaController {
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Retorna um chamada especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo chamada com um id informado")
     public ResponseEntity<Chamada> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return  chamadaRepository

@@ -57,6 +57,7 @@ public class HistoricoController {
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Retorna um historico especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo historico com um id informado")
     public ResponseEntity<Historico> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return  historicoRepository
@@ -66,6 +67,7 @@ public class HistoricoController {
     }
     
     @GetMapping("cpf/{cpfCliente}")
+    @Operation(summary = "Retorna um historico especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo historico com um cpf informado de um cliente relacionado")
     public ResponseEntity<Historico> get(@PathVariable String cpfCliente){
         log.info("Buscar por CPF: {}", cpfCliente);
         Historico historico = historicoRepository.findByCpfCliente(cpfCliente);

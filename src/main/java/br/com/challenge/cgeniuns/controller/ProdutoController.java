@@ -65,6 +65,7 @@ public class ProdutoController {
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Lista todos os produtos cadastrados no sistema.", description = "Endpoint que retorna um objetos do tipo produto com um id informado")
     public ResponseEntity<Produto> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return  produtoRepository

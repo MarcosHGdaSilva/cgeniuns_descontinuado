@@ -66,6 +66,7 @@ public class ScriptController {
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Retorna um script especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo script com um id informado")
     public ResponseEntity<Script> get(@PathVariable Long id){
         log.info("Buscar por id: {}", id);
         return  scriptRepository
@@ -75,6 +76,7 @@ public class ScriptController {
     }
 
     @GetMapping("cpf/{cpf}")
+    @Operation(summary = "Retorna um script especifico cadastrado no sistema.", description = "Endpoint que retorna um objeto do tipo script com um cpf informado relacionado a um cliente ou atendente")
     public ResponseEntity<Script> get(@PathVariable String cpf){
         log.info("Buscar por id: {}", cpf);
         Script script = scriptRepository.findByCpf_cliente(cpf);
